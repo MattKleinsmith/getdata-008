@@ -29,7 +29,7 @@ Please see the codebook (CodeBook.md) for descriptions of the raw data set and t
 `subject_test <- read.table("UCI HAR Dataset/test/subject_test.txt")`<br /><br />
 
 ####Step 1: Merges the training and the test sets to create one data set:
-First, it prepares the training set to be merged and does the same for the test set. It does this by merging the seperate pieces of the training set (the subjects, the activities, and the features) and naming the subject column and the activity column:<br /><br />
+First, it prepares the training set to be merged and does the same for the test set. It does this by merging the separate pieces of the training set (the subjects, the activities, and the features) and naming the subject column and the activity column:<br /><br />
 `y_train_prepared <- y_train`<br />
 `names(y_train_prepared) <- "Activity"`<br />
 `X_train_prepared <- cbind(X_train, y_train_prepared)`<br /><br />
@@ -64,7 +64,7 @@ It then combines the extracted columns as well as the Subject column and the Act
 `X_mean_std_activity_subject <- cbind(X_mean_std, Activity, Subject)`<br /><br />
 
 ####Step 3. Uses descriptive activity names to name the activities in the data set:
-First it shorten the name of the data set:<br /><br />
+First it shortens the name of the data set:<br /><br />
 `data <- X_mean_std_activity_subject`<br /><br />
 
 Then it prepares the arrays of activity IDs and names:<br /><br />
@@ -86,10 +86,10 @@ First, it creates an array for the subjects, an array for the activities, and an
 `activities <- activity_labels$V2`<br />
 `variables <- names(data)[1:66]`<br /><br />
 
-Then, it initializes an empty data frame, to be filled into a tidy data frame:<br /><br />
+Then, it initializes an empty data frame that will become the tidy data frame:<br /><br />
 `tidy_data <- data.frame()`<br /><br />
 
-Then, it goes through each subject-activity-variable configuration and takes the mean of all the values under the variable for that subject-activity pair, and then adds it along with the subject and the activity as a row to the tidy data frame:<br /><br />
+Then, it goes through each subject-activity-variable configuration and takes the mean of all the values under the variable for that subject-activity pair, and adds a new row to the tidy data set containing that subject, that activity, and that mean:<br /><br />
 `for (subject in subjects) {`<br />
     
 &nbsp;&nbsp;&nbsp;&nbsp;`    for (activity in activities) {`<br />
