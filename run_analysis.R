@@ -5,7 +5,8 @@
 ##           list.
 ## course: Getting and Cleaning Data
 ## date: "Friday, October 24, 2014"
-## output: Tidy dataset based on the HAR dataset.
+## input: UCI HAR Dataset, see the section below for the exact files.
+## output: Tidy dataset based on the HAR dataset, saved as tidy_data.txt
 ## ---
 
 ## Reads the data into R:
@@ -65,9 +66,9 @@ Subject <- X$Subject
 
 X_mean_std_activity_subject <- cbind(X_mean_std, Activity, Subject)
 
-data <- X_mean_std_activity_subject # Makes the name of the data frame simpler.
-
 #3. Uses descriptive activity names to name the activities in the data set:
+
+data <- X_mean_std_activity_subject # Makes the name of the data frame simpler.
 
 activity_ids <- activity_labels$V1
 activity_names <- activity_labels$V2
@@ -122,8 +123,13 @@ for (subject in subjects) {
     
 }
 
+# Concatenates "Avg_" to the beginning of each feature name:
+for (index in 3:68) { names(tidy_data)[index] <- paste0("Avg_", names(tidy_data)[index])}
+
+# Removes row names:
 rownames(tidy_data) <- NULL
 
-write.table(tidy_data, file = "tidy-data.txt", row.names = FALSE)
+# Outputs the tidy data set:
+write.table(tidy_data, file = "tidy_data.txt", row.names = FALSE)
 
 ## End of script.
